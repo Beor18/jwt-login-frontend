@@ -1,0 +1,16 @@
+<div class="container">
+    <form class="form-signin" (ngSubmit)="login()" #loginForm="ngForm">
+        <div class="alert alert-warning alert-dismissible" role="alert" *ngIf="message !== ''">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button> {{message}}
+        </div>
+        <h2 class="form-signin-heading">Login</h2>
+        <label for="inputEmail" class="sr-only">Email address</label>
+        <input type="email" class="form-control" placeholder="Email address" [(ngModel)]="loginData.email" name="email" required/>
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" class="form-control" placeholder="Password" [(ngModel)]="loginData.password" name="password" required/>
+        <button class="btn btn-lg btn-primary btn-block" type="submit" [disabled]="!loginForm.form.valid">Entrar</button>
+        <p>
+            ¿No esta registrado? <a [routerLink]="['/signup']">Registrate aquí</a>
+        </p>
+    </form>
+</div>

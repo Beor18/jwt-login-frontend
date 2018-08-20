@@ -1,0 +1,13 @@
+<div class="container">
+    <form class="form-signin" (ngSubmit)="signup()" #signupForm="ngForm">
+        <div class="alert alert-warning alert-dismissible" role="alert" *ngIf="message !== ''">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button> {{message}}
+        </div>
+        <h2 class="form-signin-heading">Regístrate ahora</h2>
+        <input type="text" class="form-control" placeholder="Nombre" [(ngModel)]="signupData.name" name="name" required/>
+        <input type="email" class="form-control" placeholder="Email" [(ngModel)]="signupData.email" name="email" required/>
+        <input type="password" class="form-control" placeholder="Password" [(ngModel)]="signupData.password" name="password" required/>
+        <input type="password" class="form-control" placeholder="Confirmar Password" [(ngModel)]="signupData.password_confirm" name="password_confirm" required/>
+        <button class="btn btn-lg btn-primary btn-block" type="submit" [disabled]="!signupForm.form.valid">Registrar</button>
+    </form>
+</div>

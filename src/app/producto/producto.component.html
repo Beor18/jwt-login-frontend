@@ -1,0 +1,17 @@
+<div class="container">
+    <h1>Producto Lista <button class="btn btn-success" (click)="logout()">Cerrar Sesion</button></h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Titulo</th>
+                <th>Autor</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let producto of productos">
+                <td>{{ producto.titulo }}</td>
+                <td>{{ producto.autor }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
