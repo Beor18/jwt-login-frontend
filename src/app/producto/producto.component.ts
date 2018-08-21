@@ -11,11 +11,14 @@ import { tap, catchError } from 'rxjs/operators';
 })
 export class ProductoComponent implements OnInit {
   productos: any;
+  httpOptions = localStorage.getItem('jwtToken');
+  productoData = { titulo: '', autor: '' };
+  data: any;
+  message = '';
   constructor(private http: HttpClient, private router: Router) { }
 
   ngOnInit() {
-    const httpOptions = localStorage.getItem('jwtToken');
-    this.http.get('http://localhost:5000/api/users/producto?secret_token=' + httpOptions).subscribe(data => {
+    this.http.get('http://localhost:5000/api/users/producto?secret_token=' + this.httpOptions).subscribe(data => {
       this.productos = data;
       console.log(this.productos);
     }, err => {
@@ -28,6 +31,15 @@ export class ProductoComponent implements OnInit {
   logout() {
     localStorage.removeItem('jwtToken');
     this.router.navigate(['login']);
+  }
+
+  producto() {
+    this.http.post('http://localhost:5000/api/users/producto?secret_token=' + this.httpOptions, this.productoData).subscribe(resp => {
+      this.data = resp;
+      this.router.navigate(['/productos']);
+    }, err => {
+      this.message = err.error.msg;
+    });
   }
 
 }
