@@ -12,6 +12,7 @@ import { tap, catchError } from 'rxjs/operators';
 export class SignupComponent implements OnInit {
 
   constructor(private http: HttpClient, private router: Router) { }
+  urls = 'http://localhost:5000/api/users/register';
   signupData = { name: '', email: '', password: '', password_confirm: ''  };
   message = '';
 
@@ -19,7 +20,7 @@ export class SignupComponent implements OnInit {
   }
 
   signup() {
-    this.http.post('http://localhost:5000/api/users/register', this.signupData).subscribe(resp => {
+    this.http.post(this.urls, this.signupData).subscribe(resp => {
       console.log(resp);
       this.router.navigate(['signup']);
     }, err => {
