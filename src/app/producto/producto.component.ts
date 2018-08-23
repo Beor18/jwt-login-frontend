@@ -11,7 +11,9 @@ import { tap, catchError } from 'rxjs/operators';
 })
 export class ProductoComponent implements OnInit {
   productos: any;
-  urls = 'http://localhost:5000/api/users/producto?secret_token=';
+  page = 1;
+  maximumPages = 2;
+  urls = `http://localhost:5000/api/producto?page=${this.page}&perPage=9&secret_token=`;
   httpOptions = localStorage.getItem('jwtToken');
   opciones = this.httpOptions;
   productoData = { titulo: '', autor: '' };
