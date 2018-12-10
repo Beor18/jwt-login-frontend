@@ -13,9 +13,8 @@ export class ProductoComponent implements OnInit {
   productos: any;
   page = 1;
   maximumPages = 2;
-  urls = `http://localhost:5000/api/producto?page=${this.page}&perPage=9&secret_token=`;
+  urls = `http://localhost:5000/api/productos`;
   httpOptions = localStorage.getItem('jwtToken');
-  opciones = this.httpOptions;
   productoData = { titulo: '', autor: '' };
   data: any;
   message = '';
@@ -23,7 +22,11 @@ export class ProductoComponent implements OnInit {
   constructor(private http: HttpClient, private router: Router) { }
 
   ngOnInit() {
-    this.http.get(this.urls + this.httpOptions).subscribe(data => {
+    this.getProducto();
+  }
+
+  getProducto() {
+    this.http.get(this.urls).subscribe(data => {
       this.productos = data;
       console.log(this.productos);
     }, err => {
@@ -39,7 +42,7 @@ export class ProductoComponent implements OnInit {
   }
 
   producto() {
-    this.http.post(this.urls + this.httpOptions, this.productoData).subscribe(resp => {
+    this.http.post(this.urls, this.productoData).subscribe(resp => {
       this.data = resp;
       this.router.navigate(['/productos']);
     }, err => {
